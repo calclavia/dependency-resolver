@@ -1,0 +1,12 @@
+{
+  "name": "pluralsight-exercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Henry Mao",
+  "bugs": {
+    "url": "https://github.com/calclavia/pluralsight-exercise/issues"
+  }
+}
