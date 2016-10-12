@@ -43,7 +43,7 @@ module.exports = {
    * @return An array of strings such that no package comes after its dependency.
    */
   linearizeGraph(graph) {
-
+    return []
   },
 
   /**
