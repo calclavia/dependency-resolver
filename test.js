@@ -63,7 +63,33 @@ describe('Dependency resolver', () => {
     })
 
     it('should return a list of in-degrees', () => {
-      throw new Error()
+      expect(computeInDegrees({
+        'a': 'b'
+      })).to.deep.equal({
+        'a': 0,
+        'b': 1
+      })
+
+       expect(computeInDegrees({
+        'a': 'b',
+        'b': 'c'
+      })).to.deep.equal({
+        'a': 0,
+        'b': 1,
+        'c': 1
+      })
+
+      expect(computeInDegrees({
+        'a': 'b',
+        'b': 'c',
+        'b': 'c',
+        'g': 'c',
+      })).to.deep.equal({
+        'a': 0,
+        'b': 1,
+        'c': 3,
+        'g': 0
+      })
     })
   })
 })
