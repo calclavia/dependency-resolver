@@ -15,7 +15,14 @@ const dependencyResolver = {
    *         precede that package.
    */
   computeOrder(dependencies) {
+    // Compute the graph
+    let graph = dependencyResolver.parseInput(dependencies)
 
+    // Linearize the graph, reverse it, and join it into a string
+    return dependencyResolver
+      .linearizeGraph(graph)
+      .reverse()
+      .join(', ')
   },
   /**
    * Given a list of strings that contain a a package and its
