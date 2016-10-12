@@ -189,7 +189,25 @@ describe('Dependency resolver', () => {
     })
 
     it('throws an error when a cycle dependency is provided', () => {
-      throw new Error()
+      expect(
+          () => computeOrder([
+            'KittenService: ',
+            'Leetmeme: Cyberportal',
+            'Cyberportal: Ice',
+            'CamelCaser: KittenService',
+            'Fraudstream: ',
+            'Ice: Leetmeme'
+          ])
+        )
+        .to.throw(Error)
+
+      expect(
+          () => computeOrder([
+            'Ice: Cyberportal',
+            'Cyberportal: Ice'
+          ])
+        )
+        .to.throw(Error)
     })
   })
 })
