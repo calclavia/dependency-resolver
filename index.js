@@ -42,5 +42,16 @@ module.exports = {
    */
   linearizeGraph(graph) {
 
+  },
+
+  /**
+   * Given a graph represented as an adjacency list, compute the number of in-degrees
+   * for every single vertex and returns them as an object.
+   * 
+   * @param {Object} graph - A JSON object that maps vertex key label to their neighbor.
+   * @return An object that maps (vertex) -> # of in-degrees to that vertex.
+   */
+  computeInDegrees(graph) {
+
   }
 }

@@ -41,11 +41,25 @@ describe('Dependency resolver', () => {
   })
 
   describe('linearizeGraph()', () => {
+    it('should return an empty array given an empty graph', () => {
+      throw new Error()
+    })
+    
     it('should linearize a DAG', () => {
       throw new Error()
     })
 
     it('should throw an error on a non-DAG', () => {
+      throw new Error()
+    })
+  })
+
+  describe('computeInDegrees()', () => {
+    it('should return an empty object given an empty graph', () => {
+      throw new Error()
+    })
+
+    it('should return a list of in-degrees', () => {
       throw new Error()
     })
   })
