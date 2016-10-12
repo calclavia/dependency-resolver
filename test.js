@@ -85,7 +85,32 @@ describe('Dependency resolver', () => {
     })
 
     it('should throw an error on a non-DAG', () => {
-      throw new Error()
+      // Error cases when we provide a graph with cycles
+      expect(
+          () => linearizeGraph({
+            'a': 'b',
+            'b': 'a'
+          })
+        )
+        .to.throw(Error)
+
+      expect(
+          () => linearizeGraph({
+            'a': 'b',
+            'b': 'c',
+            'c': 'd',
+            'd': 'a'
+          })
+        )
+        .to.throw(Error)
+
+      expect(
+          () => linearizeGraph({
+            'c': 'd',
+            'd': 'c'
+          })
+        )
+        .to.throw(Error)
     })
   })
 
