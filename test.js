@@ -1,5 +1,5 @@
-const index = require('index')
-const assert = require('assert')
+const { parseInput } = require('./index')
+const { expect } = require('chai')
 
 describe('Dependency resolver', () => {
   describe('#parseInput()', () => {
