@@ -70,7 +70,7 @@ describe('Dependency resolver', () => {
         'b': 1
       })
 
-       expect(computeInDegrees({
+      expect(computeInDegrees({
         'a': 'b',
         'b': 'c'
       })).to.deep.equal({
@@ -82,11 +82,12 @@ describe('Dependency resolver', () => {
       expect(computeInDegrees({
         'a': 'b',
         'b': 'c',
-        'b': 'c',
+        'd': 'c',
         'g': 'c',
       })).to.deep.equal({
         'a': 0,
         'b': 1,
+        'd': 0,
         'c': 3,
         'g': 0
       })
