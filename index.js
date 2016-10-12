@@ -1,7 +1,7 @@
 /**
  * Contains all functions to execute the program
  */
-module.export = new class {
+module.export = {
     /**
      * Given a list of strings that contain a a package and its
      * dependency, return an object that maps package keys to
