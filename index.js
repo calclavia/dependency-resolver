@@ -40,12 +40,13 @@ const dependencyResolver = {
    * after its dependency.
    * 
    * @param {Object} inputGraph - A JSON object that maps vertex key label to their neighbor.
-   * @return An array of strings such that no package comes after its dependency.
+   * @return An array of packages such that no package comes after its dependency.
    */
   linearizeGraph(graph) {
-      // A map of all vertices to their in-degrees
+    // A map of all vertices to their in-degrees
     let inDegrees = dependencyResolver.computeInDegrees(graph)
 
+    // An array of packages such that no package comes after its dependency.
     let linearization = []
 
     /*
@@ -63,13 +64,20 @@ const dependencyResolver = {
         .keys(inDegrees)
         .filter(vertex => inDegrees[vertex] == 0)
 
+      if (sourceVertices.length == 0)
+        throw new Error('Input graph is not a DAG.')
+
       let source = sourceVertices[0]
       // Add the source to linearize
       linearization.push(source)
-      // Find the neighbor pointed to by this source, and 
-      // decrease its in-degrees
-      let neighbor = graph[source]
-      inDegrees[neighbor] -= 1
+
+      if (source in graph) {
+        // Find the neighbor pointed to by this source, and 
+        // decrease its in-degrees
+        let neighbor = graph[source]
+        inDegrees[neighbor] -= 1
+      }
+
       // Remove source from graph
       delete inDegrees[source]
     }
