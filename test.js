@@ -1,6 +1,9 @@
 const {
-  parseInput
+  parseInput,
+  linearizeGraph,
+  computeInDegrees
 } = require('./index')
+
 const {
   expect
 } = require('chai')
@@ -44,7 +47,7 @@ describe('Dependency resolver', () => {
     it('should return an empty array given an empty graph', () => {
       throw new Error()
     })
-    
+
     it('should linearize a DAG', () => {
       throw new Error()
     })
@@ -56,7 +59,7 @@ describe('Dependency resolver', () => {
 
   describe('computeInDegrees()', () => {
     it('should return an empty object given an empty graph', () => {
-      throw new Error()
+      expect(computeInDegrees({})).to.deep.equal({})
     })
 
     it('should return a list of in-degrees', () => {
