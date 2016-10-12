@@ -52,6 +52,6 @@ module.exports = {
    * @return An object that maps (vertex) -> # of in-degrees to that vertex.
    */
   computeInDegrees(graph) {
-
+    return {}
   }
 }
