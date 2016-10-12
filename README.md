@@ -3,6 +3,8 @@ The following exercise contains a JavaScript program that given an array
 of packages and their dependencies, returns a string that specifies the
 order to install all dependencies separated by a comma.
 
+The code is written using ES6 JavaScript. The latest version of NodeJS is required.
+
 Example input:
 ```
 ['KittenService: CamelCaser', 'CamelCaser: ']

@@ -21,8 +21,12 @@ module.exports = {
     return dependencies
       .map(str => {
         // Map every string in the array to an object
-        let packageDepMap = str.split(': ')
-        return { [packageDepMap[0]]: packageDepMap[1] }
+        let [package, dependecy] = str.split(': ')
+
+        if (dependecy)
+          return { [package]: dependecy }
+        else
+          return {}
       })
       // Merge all mappings into one object
       .reduce((a, b) => Object.assign(a, b), {})
