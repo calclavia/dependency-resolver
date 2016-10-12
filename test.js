@@ -186,6 +186,13 @@ describe('Dependency resolver', () => {
         .to.satisfy(list => list.indexOf('Ice') < list.indexOf('Cyberportal'))
         .to.satisfy(list => list.indexOf('KittenService') < list.indexOf('CamelCaser'))
         .to.satisfy(list => list.indexOf('Leetmeme') < list.indexOf('Fraudstream'))
+
+      // Edge case
+      expect(computeOrder(['a: '])).to.equal('a')
+
+      expect(computeOrder(['a: ', 'b: ']).split(', '))
+        .to.include.members(['a', 'b'])
+
     })
 
     it('throws an error when a cycle dependency is provided', () => {
