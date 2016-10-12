@@ -45,11 +45,43 @@ describe('Dependency resolver', () => {
 
   describe('linearizeGraph()', () => {
     it('should return an empty array given an empty graph', () => {
+      // Base case
       expect(linearizeGraph({})).to.deep.equal([])
     })
 
     it('should linearize a DAG', () => {
-      throw new Error()
+      // Test linearization on different DAGs
+      expect(
+          linearizeGraph({
+            'a': 'b'
+          })
+        )
+        .to.include.members(['a', 'b'])
+        .to.satisfy(list => list.indexOf('a') < list.indexOf('b'))
+
+      expect(
+          linearizeGraph({
+            'a': 'b',
+            'c': 'd'
+          })
+        )
+        .to.include.members(['a', 'b', 'c', 'd'])
+        .to.satisfy(list => list.indexOf('a') < list.indexOf('b'))
+        .to.satisfy(list => list.indexOf('c') < list.indexOf('d'))
+
+      expect(
+          linearizeGraph({
+            'a': 'b',
+            'c': 'd',
+            'e': 'd',
+            'd': 'f'
+          })
+        )
+        .to.include.members(['a', 'b', 'c', 'd', 'e', 'f'])
+        .to.satisfy(list => list.indexOf('a') < list.indexOf('b'))
+        .to.satisfy(list => list.indexOf('c') < list.indexOf('d'))
+        .to.satisfy(list => list.indexOf('e') < list.indexOf('d'))
+        .to.satisfy(list => list.indexOf('d') < list.indexOf('f'))
     })
 
     it('should throw an error on a non-DAG', () => {
