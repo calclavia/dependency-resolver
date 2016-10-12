@@ -17,7 +17,7 @@ If no such order is possible (contains cycles), the function will throw an excep
 
 ## Usage
 Requirements:
-- Node v6
+- Node v6.7.0
 - NPM
 
 Setup:
