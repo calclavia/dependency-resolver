@@ -45,7 +45,7 @@ describe('Dependency resolver', () => {
 
   describe('linearizeGraph()', () => {
     it('should return an empty array given an empty graph', () => {
-      throw new Error()
+      expect(linearizeGraph({})).to.deep.equal([])
     })
 
     it('should linearize a DAG', () => {
