@@ -1,7 +1,8 @@
 const {
   parseInput,
   linearizeGraph,
-  computeInDegrees
+  computeInDegrees,
+  computeOrder
 } = require('./index')
 
 const {
@@ -148,6 +149,47 @@ describe('Dependency resolver', () => {
         'c': 3,
         'g': 0
       })
+    })
+  })
+
+  describe('computeOrder()', () => {
+    it('returns a comma separated string of package names in order of install', () => {
+      // Perform general test that integrates all functions together
+
+      // Base case
+      expect(computeOrder([])).to.equal('')
+
+      // Normal case
+      expect(computeOrder(['KittenService: CamelCaser', 'CamelCaser: ']))
+        .to.equal('CamelCaser, KittenService')
+
+      expect(
+          computeOrder([
+            'KittenService: ',
+            'Leetmeme: Cyberportal',
+            'Cyberportal: Ice',
+            'CamelCaser: KittenService',
+            'Fraudstream: Leetmeme',
+            'Ice: '
+          ])
+          .split(', ')
+        )
+        .to.include.members([
+          'KittenService',
+          'Ice',
+          'Cyberportal',
+          'Leetmeme',
+          'CamelCaser',
+          'Fraudstream'
+        ])
+        .to.satisfy(list => list.indexOf('Cyberportal') < list.indexOf('Leetmeme'))
+        .to.satisfy(list => list.indexOf('Ice') < list.indexOf('Cyberportal'))
+        .to.satisfy(list => list.indexOf('KittenService') < list.indexOf('CamelCaser'))
+        .to.satisfy(list => list.indexOf('Leetmeme') < list.indexOf('Fraudstream'))
+    })
+
+    it('throws an error when a cycle dependency is provided', () => {
+      throw new Error()
     })
   })
 })
