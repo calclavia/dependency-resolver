@@ -30,5 +30,17 @@ module.exports = {
       })
       // Merge all mappings into one object
       .reduce((a, b) => Object.assign(a, b), {})
+  },
+
+  /**
+   * Given a graph represented as an adjacency list, perform topological sorting on the
+   * graph and return a ordered list of strings such that no package comes 
+   * after its dependency.
+   * 
+   * @param {Object} graph - A JSON object that maps vertex key label to their neighbor.
+   * @return An array of strings such that no package comes after its dependency.
+   */
+  linearizeGraph(graph) {
+
   }
 }
