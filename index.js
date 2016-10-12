@@ -18,6 +18,6 @@ module.export = {
      *         If a package does not have a dependency, it will not have a key.
      */
     parseInput(dependencies) {
-
+        return {}
     }
 }
