@@ -15,6 +15,8 @@ Output:
 'CamelCaser, KittenService'
 ```
 
+The function to call is located in index.js called `computeOrder`.
+
 If no such order is possible (contains cycles), the function will throw an exception.
 
 ## Usage

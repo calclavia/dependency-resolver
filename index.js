@@ -2,6 +2,21 @@
  * Contains all functions to execute the dependency resolver
  */
 const dependencyResolver = {
+
+  /**
+   * The main funtion of the program that given a list of
+   * packages and their dependencies, returns a string with
+   * packages in their install order separated by commas.
+   * 
+   * @param {Array} dependencies - An array of package and their dependencies.
+   *                               The array is non-nullable.
+   * @return A comma separated string of package names in the order of 
+   *         install, such that a package’s dependency will always
+   *         precede that package.
+   */
+  computeOrder(dependencies) {
+
+  },
   /**
    * Given a list of strings that contain a a package and its
    * dependency, return an object that maps package keys to
@@ -68,7 +83,7 @@ const dependencyResolver = {
         throw new Error('Input graph is not a DAG.')
 
       let source = sourceVertices[0]
-      // Add the source to linearize
+        // Add the source to linearize
       linearization.push(source)
 
       if (source in graph) {
