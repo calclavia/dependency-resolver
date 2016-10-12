@@ -45,12 +45,9 @@ const dependencyResolver = {
         // Map every string in the array to an object
         let [package, dependecy] = str.split(': ')
 
-        if (dependecy)
-          return {
-            [package]: dependecy
-          }
-        else
-          return {}
+        return {
+          [package]: dependecy ? dependecy : null
+        }
       })
       // Merge all mappings into one object
       .reduce((a, b) => Object.assign(a, b), {})
@@ -97,7 +94,9 @@ const dependencyResolver = {
         // Find the neighbor pointed to by this source, and 
         // decrease its in-degrees
         let neighbor = graph[source]
-        inDegrees[neighbor] -= 1
+
+        if(neighbor)
+          inDegrees[neighbor] -= 1
       }
 
       // Remove source from graph
@@ -121,17 +120,19 @@ const dependencyResolver = {
     Object.keys(graph)
       .forEach(key => {
         if (!(key in inDegrees))
-        // Initialize all keys to have inDegrees of 0
+          // Initialize all keys to have inDegrees of 0
           inDegrees[key] = 0
 
         let neighbor = graph[key]
 
-        if (neighbor in inDegrees)
-        // Neighbor is already in inDegrees, increase the inDegrees count
-          inDegrees[neighbor] += 1
-        else
-        // Initialize the inDegrees of neighbor to 1
-          inDegrees[neighbor] = 1
+        if (neighbor) {
+          if (neighbor in inDegrees)
+            // Neighbor is already in inDegrees, increase the inDegrees count
+            inDegrees[neighbor] += 1
+          else
+            // Initialize the inDegrees of neighbor to 1
+            inDegrees[neighbor] = 1
+        }
       })
 
     return inDegrees
