@@ -1,7 +1,7 @@
 /**
- * Contains all functions to execute the program
+ * Contains all functions to execute the dependency resolver
  */
-module.exports = {
+const dependencyResolver = {
   /**
    * Given a list of strings that contain a a package and its
    * dependency, return an object that maps package keys to
@@ -39,11 +39,42 @@ module.exports = {
    * graph and return a ordered list of strings such that no package comes 
    * after its dependency.
    * 
-   * @param {Object} graph - A JSON object that maps vertex key label to their neighbor.
+   * @param {Object} inputGraph - A JSON object that maps vertex key label to their neighbor.
    * @return An array of strings such that no package comes after its dependency.
    */
   linearizeGraph(graph) {
-    return []
+      // A map of all vertices to their in-degrees
+    let inDegrees = dependencyResolver.computeInDegrees(graph)
+
+    let linearization = []
+
+    /*
+     * While there are still nodes in the graph, remove any
+     * source from the graph and add it to the linearization
+     * list until the graph has no more nodes.
+     * 
+     * We use inDegrees object to keep track of what nodes
+     * are left in the graph to prevent modifying the graph
+     * given as input.
+     */
+    while (Object.keys(inDegrees).length > 0) {
+      // Find the first node with 0 in-degrees (source vertex)
+      let sourceVertices = Object
+        .keys(inDegrees)
+        .filter(vertex => inDegrees[vertex] == 0)
+
+      let source = sourceVertices[0]
+      // Add the source to linearize
+      linearization.push(source)
+      // Find the neighbor pointed to by this source, and 
+      // decrease its in-degrees
+      let neighbor = graph[source]
+      inDegrees[neighbor] -= 1
+      // Remove source from graph
+      delete inDegrees[source]
+    }
+
+    return linearization
   },
 
   /**
@@ -60,19 +91,22 @@ module.exports = {
     Object.keys(graph)
       .forEach(key => {
         if (!(key in inDegrees))
-          // Initialize all keys to have inDegrees of 0
+        // Initialize all keys to have inDegrees of 0
           inDegrees[key] = 0
 
         let neighbor = graph[key]
 
         if (neighbor in inDegrees)
-          // Neighbor is already in inDegrees, increase the inDegrees count
+        // Neighbor is already in inDegrees, increase the inDegrees count
           inDegrees[neighbor] += 1
         else
-          // Initialize the inDegrees of neighbor to 1
+        // Initialize the inDegrees of neighbor to 1
           inDegrees[neighbor] = 1
       })
 
     return inDegrees
   }
 }
+
+// Export dependency resolver as a module
+module.exports = dependencyResolver
