@@ -56,7 +56,8 @@ describe('Dependency resolver', () => {
       // Test linearization on different DAGs
       expect(
           linearizeGraph({
-            'a': 'b'
+            'a': 'b',
+            'b': null
           })
         )
         .to.include.members(['a', 'b'])
@@ -65,7 +66,9 @@ describe('Dependency resolver', () => {
       expect(
           linearizeGraph({
             'a': 'b',
-            'c': 'd'
+            'c': 'd',
+            'b': null,
+            'd': null
           })
         )
         .to.include.members(['a', 'b', 'c', 'd'])
@@ -75,6 +78,7 @@ describe('Dependency resolver', () => {
       expect(
           linearizeGraph({
             'a': 'b',
+            'b': null,
             'c': 'd',
             'e': 'd',
             'd': 'f'
@@ -124,7 +128,8 @@ describe('Dependency resolver', () => {
 
     it('should return a list of in-degrees', () => {
       expect(computeInDegrees({
-        'a': 'b'
+        'a': 'b',
+        'b': null
       })).to.deep.equal({
         'a': 0,
         'b': 1
@@ -132,7 +137,8 @@ describe('Dependency resolver', () => {
 
       expect(computeInDegrees({
         'a': 'b',
-        'b': 'c'
+        'b': 'c',
+        'c': null
       })).to.deep.equal({
         'a': 0,
         'b': 1,
@@ -142,6 +148,7 @@ describe('Dependency resolver', () => {
       expect(computeInDegrees({
         'a': 'b',
         'b': 'c',
+        'c': null,
         'd': 'c',
         'g': 'c',
       })).to.deep.equal({
