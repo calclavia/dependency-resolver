@@ -32,14 +32,16 @@ describe('Dependency resolver', () => {
       })
     })
 
-    it('should return an object that does not contain keys for packages without dependencies', () => {
+    it('should return an object that contains keys for packages without dependencies', () => {
       // b has no dependency
       expect(parseInput(['a: b', 'b: '])).to.deep.equal({
-        'a': 'b'
+        'a': 'b',
+        'b': null
       })
       expect(parseInput(['a: c', 'c: ', 'e: g'])).to.deep.equal({
         'a': 'c',
-        'e': 'g'
+        'e': 'g',
+        'c': null
       })
     })
   })
